@@ -4,6 +4,7 @@ function getRndInteger(min, max) {
 }
 
 class Card {
+    acquiredValues;
     values;
     id;
     rows;
@@ -13,8 +14,10 @@ class Card {
         this.rows = rows;
         this.cols = cols;
         this.values = new Array(cols);
+        this.acquiredValues = new Array(cols)
         for(let i =0; i<this.cols;i++){
             this.values[i] = new Array(this.rows);
+            this.acquiredValues[i] = new Array(this.rows);
         }
     }
 
@@ -29,6 +32,7 @@ class Card {
                 /*console.log(value);
                 values.push(value);*/
                 this.values[i][j] = value;
+                this.acquiredValues[i][j] = false;
                 console.log(this.values[i][j]);
             }
             console.log("\n");
@@ -37,6 +41,60 @@ class Card {
 
     showValues(){
         console.log(this.values);
+    }
+
+    searchNumber(number){
+        for(let i=0; i<this.cols;i++){
+            for(let j=0;j<this.rows;j++){
+                if(this.values[i][j] == number){
+                    console.log("indices:",i,j);
+                    return [i,j];
+                }
+            }
+            console.log("no coincide");
+            return undefined;
+        }
+    }
+
+    acquireNumber(number){
+        let index = this.searchNumber(number);
+        if(index != undefined){
+            let indexX = index[0];
+            let indexY = index[1];
+            console.log(indexX, indexY);
+            this.acquiredValues[indexX][indexY] = true;
+            return true;
+        }
+        return false;
+    }
+
+    getAcquiredValues(){
+        return this.acquiredValues;
+    }
+
+    checkLine(){
+        let result = false;
+        for(let i=0;i<this.rows;i++){
+            for(let j=0;j<this.cols;j++){
+                if(this.acquiredValues[i][j] == false){
+                    result = false;
+                    break;
+                }else{
+                    result = true;
+                }
+            }
+        }
+        return result;
+    }
+
+    checkBingo(){
+        for(let i=0;i<this.rows;i++){
+            for(let j=0;j<this.cols;j++){
+                if(this.acquiredValues[i][j] == false)
+                    return false;
+            }
+        }
+        return true;
     }
 
     get Values(){
