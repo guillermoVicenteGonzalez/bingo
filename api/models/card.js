@@ -3,12 +3,15 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
 }
 
+
+
 class Card {
     acquiredValues;
     values;
     id;
     rows;
     cols;
+    name;
 
     constructor(rows,cols){
         this.rows = rows;
@@ -19,6 +22,14 @@ class Card {
             this.values[i] = new Array(this.rows);
             this.acquiredValues[i] = new Array(this.rows);
         }
+    }
+
+    static getRndInteger(min,max){
+        return Math.floor(Math.random() * (max - min) ) + min;
+    }
+
+    setId(value){
+        this.id = value;
     }
 
     generateValues(){
@@ -33,9 +44,7 @@ class Card {
                 values.push(value);*/
                 this.values[i][j] = value;
                 this.acquiredValues[i][j] = false;
-                console.log(this.values[i][j]);
             }
-            console.log("\n");
         }
     }
 
@@ -99,6 +108,10 @@ class Card {
 
     get Values(){
         return this.values;
+    }
+
+    addName(name){
+        this.name = name;
     }
 
 }
