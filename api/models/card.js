@@ -16,11 +16,11 @@ class Card {
     constructor(rows,cols){
         this.rows = rows;
         this.cols = cols;
-        this.values = new Array(cols);
-        this.acquiredValues = new Array(cols)
-        for(let i =0; i<this.cols;i++){
-            this.values[i] = new Array(this.rows);
-            this.acquiredValues[i] = new Array(this.rows);
+        this.values = new Array(rows);
+        this.acquiredValues = new Array(rows)
+        for(let i =0; i<this.rows;i++){
+            this.values[i] = new Array(this.cols);
+            this.acquiredValues[i] = new Array(this.cols);
         }
     }
 
@@ -33,13 +33,16 @@ class Card {
     }
 
     generateValues(){
-        for(let i =0; i<this.cols;i++){
-            for(let j=0;j<this.rows;j++){
-                let min = 0 + i * 10;
+        let count = new Array();
+        for(let i =0; i<this.rows;i++){
+            for(let j=0;j<this.cols;j++){
+                let min = 0 + j * 10;
                 let max = min + 9;
                 do{
                     var value = getRndInteger(min,max);
-                }while(this.values[i].includes(value));
+                //}while(this.values.includes(value));
+                }while(count.includes(value));
+                count.push(value);
                 /*console.log(value);
                 values.push(value);*/
                 this.values[i][j] = value;
@@ -50,11 +53,12 @@ class Card {
 
     showValues(){
         console.log(this.values);
+        return this.values;
     }
 
     searchNumber(number){
-        for(let i=0; i<this.cols;i++){
-            for(let j=0;j<this.rows;j++){
+        for(let i=0; i<this.rows;i++){
+            for(let j=0;j<this.cols;j++){
                 if(this.values[i][j] == number){
                     console.log("indices:",i,j);
                     return [i,j];

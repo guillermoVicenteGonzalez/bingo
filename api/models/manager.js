@@ -19,6 +19,17 @@ class Manager{
         myCard.id= this.cardCollection.length +1;
         //comprobar que el id no está repetido. Cuidao
         this.cardCollection.push(myCard);
+        return myCard;
+    }
+    
+    addCardWithName(name){
+        let myCard = new Card(this.rows, this.cols);
+        myCard.generateValues();
+        myCard.id= this.cardCollection.length +1;
+        myCard.addName(name);
+        //comprobar que el id no está repetido. Cuidao
+        this.cardCollection.push(myCard);
+        return myCard;
     }
 
     getCardCollection(){
@@ -26,7 +37,8 @@ class Manager{
     }
 
     getCardWithId(id){
-        return this.cardCollection[id];
+        //hay que mejorar esto.
+        return this.cardCollection[id-1];
     }
 
     getCardIds(){
@@ -51,9 +63,17 @@ class Manager{
         for(const i in this.cardCollection){
             this.cardCollection[i].acquireNumber(rndmNmbr);
         }
+        return rndmNmbr;
+    }
+
+    deleteCardCollection(){
+        this.cardCollection = [];
+        return this.cardCollection;
     }
 
 
 }
 
-module.exports = Manager;
+const myManager = new Manager(3,9);
+//module.exports = Manager;
+module.exports = myManager;
