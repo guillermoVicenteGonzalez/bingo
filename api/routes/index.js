@@ -16,6 +16,7 @@ router.route("/bingo/cards/:id")
 
 router.route("/bingo/values")
     .post(bingoCtrl.addNumer)
+    .get(bingoCtrl.getNumbers)
 
 
 

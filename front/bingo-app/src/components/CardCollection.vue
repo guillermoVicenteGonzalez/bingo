@@ -1,7 +1,12 @@
 <template>
 
     <h1>Collection</h1>
-
+    <label
+        style="display:inline; margin: 3px;"
+        v-for="item of numbers"
+    >
+        <label>{{item}}</label>
+    </label>
     <v-container class="d-flex flex-wrap justify-center">
         <v-card
             width="500"
@@ -14,16 +19,25 @@
         :acquired-values="item.acquiredValues"></BingoGrid>
         </v-card>
     </v-container>
+
+    <ControlPanel
+        @cardCreated="getAllCards(); getNumbers()"
+        style="bottom: 100vh;"
+    >
+    </ControlPanel>
 </template>
 
 <script setup>
     import axios from "axios";
     import {ref} from "vue";
     import BingoGrid from "./bingoGrid.vue";
+    import ControlPanel from "./ControlPanel.vue";
 
     var cards = ref([]);
+    var numbers = ref([]);
 
     async function getAllCards(){
+        console.log("getting all cards");
         let promise = axios.get("http://localhost:3000/api/bingo/cards")
         .then(function(result){
             cards.value = result.data.data;
@@ -35,6 +49,20 @@
         })
     }
 
+    async function getNumbers(){
+        console.log("getting numbers");
+        let promise = axios.get("http://localhost:3000/api/bingo/values")
+        .then(function(result){
+            numbers.value = result.data.data;
+            console.log("done");
+        })
+        .catch(function(err){
+            console.log(err);
+        })
+        console.log(numbers);
+    }
+
+    getNumbers();
     getAllCards();
 
 </script>

@@ -57,3 +57,15 @@ exports.addNumer = async function(req,res){
     }
 }
 
+exports.getNumbers = async function(req,res){
+    result = await Manager.getNumbers();
+    if(result){
+        console.log("Success: retrieving numbers");
+        res.status(200).json({success:true, data:result});
+    }else{
+        let msg = "Error: couldn't retrieve numbers";
+        console.log(msg);
+        res.status(400).json({success:true, message:msg});
+    }
+}
+
