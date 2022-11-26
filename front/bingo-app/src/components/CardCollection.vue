@@ -1,12 +1,14 @@
 <template>
 
     <h1>Collection</h1>
-    <label
-        style="display:inline; margin: 3px;"
-        v-for="item of numbers"
-    >
-        <label>{{item}}</label>
-    </label>
+    <v-container class="d-flex flex-wrap">
+        <label
+            style="display:inline; margin: 3px;"
+            v-for="item of numbers"
+        >
+            <label>{{item}}</label>
+        </label>
+    </v-container>
     <v-container class="d-flex flex-wrap justify-center">
         <v-card
             width="500"
@@ -22,7 +24,7 @@
 
     <ControlPanel
         @cardCreated="getAllCards(); getNumbers()"
-        style="bottom: 100vh;"
+        style="bottom: 0;"
     >
     </ControlPanel>
 </template>

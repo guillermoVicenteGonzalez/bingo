@@ -57,16 +57,18 @@ class Card {
     }
 
     searchNumber(number){
+        //estan "mas o menos" ordenados -> se puede optimizar
         for(let i=0; i<this.rows;i++){
             for(let j=0;j<this.cols;j++){
+                console.log(i,j);
                 if(this.values[i][j] == number){
                     console.log("indices:",i,j);
                     return [i,j];
                 }
             }
-            console.log("no coincide");
-            return undefined;
         }
+        console.log("no coincide");
+        return undefined;
     }
 
     acquireNumber(number){
@@ -74,7 +76,7 @@ class Card {
         if(index != undefined){
             let indexX = index[0];
             let indexY = index[1];
-            console.log(indexX, indexY);
+            console.log("acquiring number " + number);
             this.acquiredValues[indexX][indexY] = true;
             return true;
         }

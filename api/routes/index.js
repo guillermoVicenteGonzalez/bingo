@@ -18,6 +18,7 @@ router.route("/bingo/values")
     .post(bingoCtrl.addNumer)
     .get(bingoCtrl.getNumbers)
 
+router.route
 
 
 module.exports = router;
