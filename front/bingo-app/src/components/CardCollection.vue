@@ -27,6 +27,10 @@
         style="bottom: 0;"
     >
     </ControlPanel>
+
+    <ErrorModal
+    ref="errorModal"
+    ></ErrorModal>
 </template>
 
 <script setup>
@@ -34,9 +38,11 @@
     import {ref} from "vue";
     import BingoGrid from "./bingoGrid.vue";
     import ControlPanel from "./ControlPanel.vue";
+    import ErrorModal from "./ErrorModal.vue";
 
     var cards = ref([]);
     var numbers = ref([]);
+    var errorModal = ref();
 
     async function getAllCards(){
         console.log("getting all cards");
@@ -47,6 +53,7 @@
             console.log("done");
         })
         .catch(function(err){
+            errorModal.value.createErrorModal("Error", "connection error", "couldn't connect to the api");
             console.log(err);
         })
     }
@@ -59,6 +66,7 @@
             console.log("done");
         })
         .catch(function(err){
+            errorModal.value.createErrorModal("Error", "connection error", "couldn't connect to the api");
             console.log(err);
         })
         console.log(numbers);
