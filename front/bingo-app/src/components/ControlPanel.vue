@@ -6,6 +6,10 @@
         <v-btn
             @click="addNumber()"
         >add number</v-btn>
+
+        <v-btn
+            @click="changeColor()"
+        >color</v-btn>
     </v-container>
 </template>
 
@@ -24,5 +28,14 @@
         let result = await axios.post("http://localhost:3000/api/bingo/values");
         console.log(result);
         emit("cardCreated");
+    }
+
+    async function changeColor(){
+        let result = await axios.get("http://192.168.0.121/V");
+        if(result){
+            console.log(result);
+        }else{
+            console.log(error);
+        }
     }
 </script>
