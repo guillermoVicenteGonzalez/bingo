@@ -1,0 +1,9 @@
+{
+    "host":"http://localhost:3000/",
+    "getAllCards":"/api/bingo/cards",
+    "createCard":"/api/bingo/cards",
+    "deleteAllCards":"/api/bingo/cards",
+    "getCard":"/api/bingo/cards/",
+    "getValues":"/api/bingo/values",
+    "addValue":"api/bingo/values"
+}
