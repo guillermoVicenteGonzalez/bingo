@@ -32,6 +32,14 @@ exports.deleteAllCards = async function(req,res){
     }
 }
 
+exports.getCardById = async function(req,res){
+    let cardId = req.params.id;
+    let card = await Manager.getCardWithId(cardId);
+
+    console.log("retreiving card with id: " + cardId);
+    res.status(200).json({success:true, data:card});
+}
+
 exports.getCardValues = async function(req,res){
     let cardId = req.params.id;
     let myValues = await Manager.getCardWithId(cardId).showValues();

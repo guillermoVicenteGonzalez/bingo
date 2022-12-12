@@ -11,7 +11,7 @@ const routes = [
     component:Landing
   },
   {path:"/collection",name:"collection", component:CardCollectionVue},
-  {path:"/card",name:"personalCard", component:personalCardVue}
+  {path:"/card",name:"personalCard", component:personalCardVue},
 ]
 
 const router = createRouter({
