@@ -14,8 +14,6 @@
 
 <script setup>
     import axios from "axios";
-//import { emit } from "process";
-    import { defineEmits } from 'vue'
 
     let emit = defineEmits(['cardCreated']);
     async function addCard(){

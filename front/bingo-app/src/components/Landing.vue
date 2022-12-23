@@ -4,6 +4,11 @@
         <v-btn
             @click="loginDialog.createLoginDialog()"
         >Log in</v-btn>
+        
+        <v-btn
+            @click="">
+        Register</v-btn>
+        
     </v-container>
 
     <login-dialog-vue
@@ -16,6 +21,5 @@
     import {ref} from "vue";
 
     var loginDialog = ref();
-
 
 </script>

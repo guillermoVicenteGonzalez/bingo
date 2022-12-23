@@ -29,8 +29,12 @@
     </ControlPanel>
 
     <ErrorModal
-    ref="errorModal"
+        ref="errorModal"
     ></ErrorModal>
+
+    <LoadingDialog
+        v-model="loadingDialog"
+    ></LoadingDialog>
 </template>
 
 <script setup>
@@ -39,14 +43,17 @@
     import BingoGrid from "./bingoGrid.vue";
     import ControlPanel from "./ControlPanel.vue";
     import ErrorModal from "./ErrorModal.vue";
+    import LoadingDialog from "./LoadingDialog.vue";
 
     var cards = ref([]);
     var numbers = ref([]);
     var errorModal = ref();
-
+    var loadingDialog = ref(false);
+    
     async function getAllCards(){
+        loadingDialog.value = true;
         console.log("getting all cards");
-        let promise = axios.get("http://localhost:3000/api/bingo/cards")
+        let promise = await axios.get("http://localhost:3000/api/bingo/cards")
         .then(function(result){
             cards.value = result.data.data;
             //console.log(cards.value);
@@ -56,20 +63,24 @@
             errorModal.value.createErrorModal("Error", "connection error", "couldn't connect to the api");
             console.log(err);
         })
+        loadingDialog.value = false;
     }
 
     async function getNumbers(){
+        loadingDialog.value = true;
         console.log("getting numbers");
-        let promise = axios.get("http://localhost:3000/api/bingo/values")
+        let promise = await axios.get("http://localhost:3000/api/bingo/values")
         .then(function(result){
             numbers.value = result.data.data;
             console.log("done");
+            loadingDialog.value = false;
         })
         .catch(function(err){
             errorModal.value.createErrorModal("Error", "connection error", "couldn't connect to the api");
             console.log(err);
-        })
-        console.log(numbers);
+        });
+        loadingDialog.value = false;
+        //console.log(numbers);
     }
 
     getNumbers();

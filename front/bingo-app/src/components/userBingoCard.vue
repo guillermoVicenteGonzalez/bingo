@@ -13,8 +13,8 @@
     <v-card>
         <div class="grid-container" v-for="(line, lineindex) in values">
             <div v-for="(cell, columnIndex) in line">
-                <label v-if="acquiredValues[lineindex][columnIndex]" style="color:white; background-color:red">{{cell}}</label>
-                <label v-else>{{cell}}</label>
+                <v-btn>v-if="acquiredValues[lineindex][columnIndex]" style="color:white; background-color:red">{{cell}}</v-btn>
+                <v-btn>v-else>{{cell}}</v-btn>
 
             </div>
         </div>   
