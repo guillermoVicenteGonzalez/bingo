@@ -22,20 +22,43 @@
             </v-card-actions>
             </v-card>
     </v-dialog>
+
+    <ErrorModal
+        ref="errorModal"
+    ></ErrorModal>
+
+    <LoadingDialog
+        v-model="loadingDialog"
+    ></LoadingDialog>
 </template>
 
 <script setup>
     import {ref} from "vue";
     import router from "@/router";
+    import axios from "axios"
+    import settings from "../settings.json"
+    import ErrorModal from "./ErrorModal.vue";
+    import LoadingDialog from "./LoadingDialog.vue";
 
     var triggerDialog = ref(false);
     var username = ref();
+    var errorModal = ref();
+    var loadingDialog = ref();
 
     async function processLogin(){
-        localStorage.setItem("username",username.value);
-        localStorage.setItem("cardId",cardId.value);
-        router.push("/card");
-        console.log("hola");
+        loadingDialog.value = true;
+        let result = await axios.get(settings.host + settings.cardWithName + username.value)
+        .then(function (response){
+            localStorage.setItem("username",username.value);
+            console.log(response.data)
+            localStorage.setItem("cardId",response.data.data.id);
+            router.push("/card");
+        })
+        .catch(function(error){
+            console.log(error);
+            errorModal.value.createErrorModal("Error","Login unsuccesfull","user does not exist");
+        });
+        loadingDialog.value = false;
     }
 
     async function createLoginDialog(){

@@ -32,8 +32,23 @@ exports.createCardWithName = async function(req,res){
     }
 }
 
-exports.getCardWithName = async function(){
+exports.getCardWithName = async function(req,res){
     let msg;
+    let name = req.params.name;
+    let collection = await Manager.getCardCollection();
+
+    for(item of collection){
+        if(item.name == name){
+            msg="Success:logging in";
+            console.log(msg);
+            res.status(200).json({success:true,data:item});
+            return undefined
+        }
+    }
+    msg="Error: User with username: " + name +" not registered";
+    console.log(msg);
+    res.status(400).json({sucess:false,message:msg});
+    return undefined
 }
 
 exports.getAllCards = async function(req,res){
