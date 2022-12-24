@@ -9,13 +9,9 @@
                     <v-text-field
                         variant="outlined"
                         v-model="username"
+                        label="name"
                     ></v-text-field>
 
-                    <v-text-field
-                        type="number"
-                        variant="outlined"
-                        v-model="cardId"
-                    ></v-text-field>
 
                     
             <v-card-actions class="justify-center">
@@ -34,7 +30,6 @@
 
     var triggerDialog = ref(false);
     var username = ref();
-    var cardId = ref();
 
     async function processLogin(){
         localStorage.setItem("username",username.value);

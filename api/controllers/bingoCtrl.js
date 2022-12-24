@@ -8,6 +8,34 @@ exports.createCard = async function(req,res){
     res.status(200).json({success:true, data:result});
 }
 
+exports.createCardWithName = async function(req,res){
+    let msg;
+    let name = req.params.name;
+    //primero busco que no exista el nombre
+    let collection = await Manager.getCardCollection();
+    for(i in collection){
+        if(collection[i].name == name){
+            msg="Error: Name alredy registered";
+            console.log(msg);
+            res.status(400).json({success:false,message:msg});
+            return undefined;
+        }
+    }
+    let result = await Manager.addCardWithName(req.params.name);
+    if(result){
+        console.log("Success creating card");
+        res.status(201).json({success:true,data:result});
+    }else{
+        msg="Error creagin card";
+        console.log(msg);
+        res.status(400).json({success:false,message:msg});
+    }
+}
+
+exports.getCardWithName = async function(){
+    let msg;
+}
+
 exports.getAllCards = async function(req,res){
     let result = await Manager.getCardCollection();
     if(result){

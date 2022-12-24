@@ -46,10 +46,7 @@ class Card {
                 /*console.log(value);
                 values.push(value);*/
                 this.values[i][j] = value;
-<<<<<<< Updated upstream
                 this.acquiredValues[i][j] = false;
-=======
->>>>>>> Stashed changes
             }
         }
     }

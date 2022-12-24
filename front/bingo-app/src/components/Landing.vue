@@ -6,7 +6,7 @@
         >Log in</v-btn>
         
         <v-btn
-            @click="">
+            @click="registerDialog.createRegisterDialog()">
         Register</v-btn>
         
     </v-container>
@@ -14,12 +14,18 @@
     <login-dialog-vue
         ref="loginDialog"
     ></login-dialog-vue>
+
+    <register-dialog-vue
+        ref="registerDialog"
+    ></register-dialog-vue>
 </template>
 
 <script setup>
     import loginDialogVue from './loginDialog.vue';
+    import registerDialogVue from './registerDialog.vue';
     import {ref} from "vue";
 
     var loginDialog = ref();
+    var registerDialog = ref();
 
 </script>

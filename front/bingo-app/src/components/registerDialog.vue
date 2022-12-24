@@ -9,13 +9,10 @@
                     <v-text-field
                         variant="outlined"
                         v-model="username"
+                        label="username"
                     ></v-text-field>
 
-                    <v-text-field
-                        type="number"
-                        variant="outlined"
-                        v-model="cardId"
-                    ></v-text-field>
+
 
                     
             <v-card-actions class="justify-center">
@@ -31,16 +28,21 @@
 <script setup>
     import {ref} from "vue";
     import router from "@/router";
+    import axios from "axios"
+
 
     var triggerDialog = ref(false);
     var username = ref();
     var cardId = ref();
 
     async function processLogin(){
+        let card;
         localStorage.setItem("username",username.value);
-        localStorage.setItem("cardId",cardId.value);
+        card = await axios.post("http://localhost:3000/api/bingo/cards/name/"+username.value);
+        console.log(card);
+        localStorage.setItem("cardId",card.data.data.id);
+        //localStorage.setItem("card",card);
         router.push("/card");
-        console.log("hola");
     }
 
     async function createRegisterDialog(){

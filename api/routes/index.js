@@ -11,6 +11,10 @@ router.route("/bingo/cards")
     .get(bingoCtrl.getAllCards)
     .delete(bingoCtrl.deleteAllCards);
 
+router.route("/bingo/cards/name/:name")
+    .post(bingoCtrl.createCardWithName)
+    .get(bingoCtrl.getCardWithName)
+
 router.route("/bingo/cards/:id")
     .get(bingoCtrl.getCardById)
 
